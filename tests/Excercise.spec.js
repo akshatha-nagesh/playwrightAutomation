@@ -76,7 +76,6 @@ test('Browser Content test', async ({ browser }) => {
     const orderId = await page.locator("tr label").last().textContent()
     console.log(orderId)
 
-    //tr [scope="row"]
     await page.locator('[routerlink="/dashboard/myorders"]').first().click()
     await page.locator("tbody").waitFor();
     const rows = await page.locator("tbody tr")
