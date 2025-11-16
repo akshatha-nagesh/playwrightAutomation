@@ -52,7 +52,7 @@ test('Browser Content test', async ({ browser }) => {
 
 })
 
-test.only("Drop down value", async ({ browser }) => {
+test("Drop down value", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -64,7 +64,7 @@ test.only("Drop down value", async ({ browser }) => {
     const submitbtn = page.locator('input[name="signin"]');
     const dropdown = page.locator('select.form-control');
     const radiobutton = page.locator('input[value="user"]+ .checkmark');
-    const checkbox=page.locator('input[id="terms"]');
+    const checkbox = page.locator('input[id="terms"]');
 
     await uname.fill("rahulshettyacademy");
     await pwd.fill("learning");
@@ -80,7 +80,7 @@ test.only("Drop down value", async ({ browser }) => {
     //assertion (ischecked) 
     console.log(await radiobutton.isChecked());
     await expect(radiobutton).toBeChecked();
-  
+
     //checkbox
     await checkbox.check();
     expect(await checkbox).toBeChecked()
@@ -91,6 +91,35 @@ test.only("Drop down value", async ({ browser }) => {
     expect(await checkbox.isChecked()).toBeFalsy()
 
     await submitbtn.click();
+
+})
+
+test.only("Child window", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const uname = page.locator('input#username');
+
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    console.log(await page.title());
+
+    const documentLink = page.locator("[href*='documents-request']");
+
+    const [newPage] = await Promise.all(
+        /* instead of await below we use promise so the steps which are dependent/async/parallele before proceeding next step.
+         if multiple page the use [newPAge1,newPage2]..  */
+        [context.waitForEvent('page'),//listner to check if any new page is opened
+        documentLink.click(), //new page is opened
+        ])
+
+    const textInNewPage = await newPage.locator(".red").textContent();
+    const arrayText = textInNewPage.split("@");
+    const domain = arrayText[1].split(" ")[0]
+    console.log(domain);
+
+
+    await uname.fill(domain); // page is used bcoz we want to work on parent page
+    // await page.pause()
+    console.log(await uname.inputValue()); // to fetch value that was added dynamically unlike previous using textContetnt()
 
 })
 
