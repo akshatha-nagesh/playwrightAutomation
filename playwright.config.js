@@ -26,7 +26,7 @@ const config = ({
     browserName: 'chromium',
     headless:false,
     screenshot:'on',
-    trace:'on',
+    trace:'retain-on-failure', // we can use on, it will give screenshots for every test(passed or failed)
   },
 
 });

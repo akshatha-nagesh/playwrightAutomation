@@ -122,7 +122,7 @@ test("Child window", async ({ browser }) => {
     console.log(await uname.inputValue()); // to fetch value that was added dynamically unlike previous using textContetnt()
 
 })
-
+//traces.playwright.dev is used to open traces and dig in each actions using before and after also we can see screenshots (which we download from report)
 
 
 
