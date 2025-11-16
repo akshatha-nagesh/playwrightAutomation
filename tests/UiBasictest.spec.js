@@ -94,7 +94,7 @@ test("Drop down value", async ({ browser }) => {
 
 })
 
-test.only("Child window", async ({ browser }) => {
+test("Child window", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     const uname = page.locator('input#username');
@@ -122,6 +122,7 @@ test.only("Child window", async ({ browser }) => {
     console.log(await uname.inputValue()); // to fetch value that was added dynamically unlike previous using textContetnt()
 
 })
+
 
 
 

@@ -1,5 +1,6 @@
 // @ts-check
 import { chromium, defineConfig, devices } from '@playwright/test';
+import { trace } from 'console';
 
 /**
  * Read environment variables from file.
@@ -23,7 +24,9 @@ const config = ({
   //browser to be used here
   use: {
     browserName: 'chromium',
-    headless:false
+    headless:false,
+    screenshot:'on',
+    trace:'on',
   },
 
 });
