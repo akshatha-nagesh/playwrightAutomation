@@ -23,7 +23,7 @@ const config = ({
   //browser to be used here
   use: {
     browserName: 'chromium',
-    headless:true
+    headless:false
   },
 
 });
