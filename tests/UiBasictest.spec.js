@@ -32,7 +32,7 @@ test('Browser Content test', async ({ browser }) => {
     await submitbtn.click();
     console.log(await page.locator('[style*="display: block"]').textContent());
     await expect(page.locator('[style*="display: block"]')).toContainText("Incorrect username/password.");
-   
+
     //to wipe off exisitng content
     await uname.fill("");
     await uname.fill("rahulshettyacademy");
@@ -52,7 +52,7 @@ test('Browser Content test', async ({ browser }) => {
 
 })
 
-test.only("Drop down value",async ({browser})=>{
+test.only("Drop down value", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -62,8 +62,10 @@ test.only("Drop down value",async ({browser})=>{
     const uname = page.locator('input#username');
     const pwd = page.locator('input#password');
     const submitbtn = page.locator('input[name="signin"]');
-    const dropdown=page.locator('select.form-control');
-    const radiobutton=page.locator('input[value="user"]+ .checkmark');
+    const dropdown = page.locator('select.form-control');
+    const radiobutton = page.locator('input[value="user"]+ .checkmark');
+    const checkbox=page.locator('input[id="terms"]');
+
     await uname.fill("rahulshettyacademy");
     await pwd.fill("learning");
 
@@ -71,9 +73,23 @@ test.only("Drop down value",async ({browser})=>{
     await dropdown.selectOption("consult");
 
     //radiobutton
-   await radiobutton.click();
-   await page.locator('#okayBtn').click();
-   // await page.pause(); // to pause the execution  and it dipalys playwright inspector
+    await radiobutton.click();
+    await page.locator('#okayBtn').click();
+    // await page.pause(); // to pause the execution  and it dipalys playwright inspector
+
+    //assertion (ischecked) 
+    console.log(await radiobutton.isChecked());
+    await expect(radiobutton).toBeChecked();
+  
+    //checkbox
+    await checkbox.check();
+    expect(await checkbox).toBeChecked()
+    expect(await checkbox.isChecked()).toBeTruthy()
+    //touncheck
+    await checkbox.uncheck();
+    //assertion
+    expect(await checkbox.isChecked()).toBeFalsy()
+
     await submitbtn.click();
 
 })
