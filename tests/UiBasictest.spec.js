@@ -1,5 +1,18 @@
 const { test, expect } = require('@playwright/test');
 
+//npm init -y
+//npm install -D @playwright/test
+//npx playwright install  
+//mkdir tests
+//cd tests
+// npm init playwright  
+//npx playwright test tests/Excercise2.spec.js
+//npx playwright test tests/Excercise2.spec.js --debug
+//npx playwright test 
+//npx playwright show-report
+//npx playwright test --headed
+//npm playwright test --ui
+
 test.skip('First test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = (await context).newPage();
