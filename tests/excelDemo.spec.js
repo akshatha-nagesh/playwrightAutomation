@@ -30,15 +30,15 @@ function readExcel(worksheet, searchText) {
  
 test('Upload download excel validation', async ({ page }) => {
   const textSearch = 'Mango';
-  const updateValue = '350';
+  const updateValue = '299';
  
   await page.goto('https://rahulshettyacademy.com/upload-download-test/index.html');
  
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download' }).click();
   const dl = await download;
-  const filePath = '/Users/rahulshetty/downloads/download.xlsx'; // or await dl.path()
- 
+  const filePath = '/Users/averneka/downloads/download.xlsx'; // or await dl.path()
+ //C:\Users\averneka\Downloads\download (1).xlsx
   // ✅ Ensure the edit finishes before upload
   await writeExcelTest(textSearch, updateValue, { rowChange: 0, colChange: 2 }, filePath);
  
