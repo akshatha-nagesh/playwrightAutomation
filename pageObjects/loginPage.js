@@ -2,7 +2,7 @@ class LoginPage{
     constructor(page)
     {
         this.page=page;
-        this.signInButton=page.locator("[value='Login']");
+        this.signInButton=page.locator("#login");
         this.username=page.locator('#userEmail');
         this.password=page.locator('#userPassword');
 

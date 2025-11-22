@@ -6,7 +6,7 @@ const {LoginPage}=require('../pageObjects/loginPage')
 test('@Webst Client App login', async ({ page }) => {
     //js file- Login js, DashboardPage
     const email = "anshika@gmail.com";
-    const pwd="IamKing@000";
+    const pwd="Iamking@000";
     const products=page.locator(".card-body");
 
     const loginPage=new LoginPage(page)
