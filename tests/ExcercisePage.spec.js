@@ -5,7 +5,9 @@ const { PageObjectManager } = require('../pageObjects/pageObjectManager')
 //convert json->string->js object
 const Data=JSON.parse(JSON.stringify(require('../Data/placeOrderExcercisePage.json')))
 
-test('@Webst Client App login', async ({ page }) => {
+for(const data of Data)
+{
+test(`@Webst Client App login ${data.productName}`, async ({ page }) => {
     //js file- Login js, DashboardPage
 
     const poManager = new PageObjectManager(page);
@@ -13,14 +15,14 @@ test('@Webst Client App login', async ({ page }) => {
 
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo()
-    await loginPage.validLogin(Data.username, Data.password)
+    await loginPage.validLogin(data.username, data.password)
 
     const dashboardPage = poManager.getDashBoardPage();
-    await dashboardPage.searchProduct(Data.productName)
+    await dashboardPage.searchProduct(data.productName)
     await dashboardPage.navigateToCart()
 
     const CartPage = poManager.getCartPage();
-    await CartPage.verifyProductIsDisplayed(Data.productName);
+    await CartPage.verifyProductIsDisplayed(data.productName);
     await CartPage.Checkout();
 
     const OrderReviewPage = poManager.getOrderREviewPage()
@@ -34,3 +36,4 @@ test('@Webst Client App login', async ({ page }) => {
     expect(orderIds.includes(await OrderHistoryPage.getOrderId())).toBeTruthy();
 
 })
+}
