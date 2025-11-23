@@ -14,7 +14,7 @@ test('Using Special Locators', async ({ browser }) => {
     await page.getByLabel("Check me out if you Love IceCreams!").check();
     await page.getByLabel("Employed").click()
     await page.getByLabel("Gender").selectOption("Male")
-    await page.pause();
+   // await page.pause();
 
     // input fields which has plaeholder attribute only
     await page.getByPlaceholder("Password").fill("Akshatha")
@@ -28,12 +28,12 @@ test('Using Special Locators', async ({ browser }) => {
     await page.getByRole("link", { name: "Shop" }).click();
 
     await page.locator("app-card").filter({ hasText: 'Nokia Edge' }).getByRole('button', { name: 'Add' }).click()
-    await page.pause()
+    //await page.pause()
 
 
 })
 
-test.only("validate more cases", async ({ browser }) => {
+test("validate more cases", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -43,10 +43,12 @@ test.only("validate more cases", async ({ browser }) => {
     await page.locator("#confirmbtn").click()
     await page.locator("#mousehover").hover()
 
-    const framePage = page.frameLocator("#courses-iframe");
+  /** 
+     const framePage = page.frameLocator("#courses-iframe");
     await framePage.locator("li a[href*='lifetime-access']:visible").click()
     const textCheck = await framePage.locator(".text h2").textContent()
     console.log(textCheck.split(" ")[1]);
+    **/
     /*await page.goto("http://google.com")
     await page.goBack();
     await page.goForward();*/

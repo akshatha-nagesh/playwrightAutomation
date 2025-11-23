@@ -20,7 +20,12 @@ const config = ({
   expect: {
     timeout: 5 * 1000,
   },
-  reporter:'html',
+  reporter:[
+    ['line'],
+    ['allure-playwright']
+  ],    
+    //'html',
+  retries:2,
   //browser to be used here
   use: {
     browserName: 'chromium',

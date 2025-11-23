@@ -71,7 +71,7 @@ test('Browser Content test', async ({ browser }) => {
     await page.locator("h1:has-text('Thankyou for the order')").isVisible() // OR
     await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");// if exact text
 
-    await page.pause();
+    //await page.pause();
 
     const orderId = await page.locator("tr label").last().textContent()
     console.log(orderId)
@@ -85,12 +85,12 @@ test('Browser Content test', async ({ browser }) => {
        // await console.log(text)
         if (orderId.includes(rowOrderId)) {
             await rows.nth(i).locator("button").first().click()
-            await page.pause()
+            //await page.pause()
 
             console.log("Order found");
             break;
         }
     }
-    await page.pause();
+   // await page.pause();
 
 })

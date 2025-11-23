@@ -7,7 +7,7 @@ const Data=JSON.parse(JSON.stringify(require('../Data/placeOrderExcercisePage.js
 
 for(const data of Data)
 {
-test(`@Webst Client App login ${data.productName}`, async ({ page }) => {
+test(`@Web Client App login ${data.productName}`, async ({ page }) => {
     //js file- Login js, DashboardPage
 
     const poManager = new PageObjectManager(page);

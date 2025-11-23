@@ -12,8 +12,25 @@ const { test, expect } = require('@playwright/test');
 //npx playwright show-report
 //npx playwright test --headed
 //npm playwright test --ui
+//npx playwright test tests/ExcercisePage.spec.js --config playwright.config1.js --project chrome  
+// {for running in particular browser if ntg given then runs in both browser}
+// npx playwright test --grep @web //to run tagged testcases  --to run tagged testcases
+/**npx playwright test  --config playwright.config1.js --project chrome --reporter=line --reporter=allure-playwright
+npx allure-commandline generate ./allure-results --clean **/
+//ORR follow below steps for allure report
+//1) npm install --save-dev allure-commandline
+//2) npx playwright test tests/ExcercisePage.spec.js 
+//3) npx allure generate ./allure-results --clean
+//4) npx allure open
+//to delete old report--> npx allure generate --clean --output allure-report
+//jenkins setup
+//java -jar jenkins.war -httpPort=9090 
+//uname-averneka/Akshatha@123
+//for cucmber
+//npm install @cucumber/cucumber
+//npx cucumber-js
 
-test.skip('First test', async ({ browser }) => {
+test.skip('@Web First test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = (await context).newPage();
     // await page.goto("https://rahulshettyacademy.com/loginpagePractise/",     {waitUntil:'domcontentloaded',timeout:60000});

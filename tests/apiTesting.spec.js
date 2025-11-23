@@ -1,6 +1,6 @@
 const { test, expect, request } = require('@playwright/test');
 const { json } = require('stream/consumers');
-const { ApiUtils } = require('./utils/apiUtils')
+const { ApiUtils } = require('../utils/apiUtils');
 const payload = { userEmail: "akshathanv7@gmail.com", userPassword: "Akshatha@123" };
 const orderPayload = { orders: [{ country: "Cuba", productOrderedId: "68a961459320a140fe1ca57a" }] };
 // let token;
@@ -96,7 +96,7 @@ test('ApiTesting login', async ({ page }) => {
         // await console.log(text)
         if (response.orderID.includes(rowOrderId)) {
             await rows.nth(i).locator("button").first().click()
-            await page.pause()
+           // await page.pause()
 
             console.log("Order found");
             break;

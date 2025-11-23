@@ -42,7 +42,7 @@ test('Using Session-Client App login', async () => {
             break;
         }
     }
-    await page.pause();
+    //await page.pause();
     const cart = page.locator('[routerlink*="cart"]');
     await cart.click();
 
@@ -98,7 +98,7 @@ test('Using Session-Client App login', async () => {
             break;
         }
     }
-    await page.pause();
+   // await page.pause();
     const orderIdDetails = await page.locator(".col-text").textContent();
     expect(orderId.includes(orderIdDetails)).toBeTruthy()
 

@@ -5,11 +5,11 @@ const { test, expect } = require('@playwright/test');
 
 test('@Webst Client App login', async ({ page }) => {
     //js file- Login js, DashboardPage
-    const email = "anshika@gmail.com";
+    const email = "akshathanv7@gmail.com";
     
     await page.goto("https://rahulshettyacademy.com/client");
     await page.getByPlaceholder("email@example.com").fill(email);
-    await page.getByPlaceholder("enter your passsword").fill("Iamking@000");
+    await page.getByPlaceholder("enter your passsword").fill("Akshatha@123");
     await page.getByRole('button', { name: "Login" }).click();
     await page.waitForLoadState('networkidle');
     await page.locator(".card-body b").first().waitFor();
