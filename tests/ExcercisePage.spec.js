@@ -1,38 +1,36 @@
 const { test, expect } = require('@playwright/test');
-const {LoginPage}=require('../pageObjects/loginPage')
-
-
+const { LoginPage } = require('../pageObjects/loginPage')
+const { DashboardPage } = require('../pageObjects/DashboardPage')
+const { PageObjectManager } = require('../pageObjects/pageObjectManager')
+//convert json->string->js object
+const Data=JSON.parse(JSON.stringify(require('../Data/placeOrderExcercisePage.json')))
 
 test('@Webst Client App login', async ({ page }) => {
     //js file- Login js, DashboardPage
-    const email = "anshika@gmail.com";
-    const pwd="Iamking@000";
-    const products=page.locator(".card-body");
 
-    const loginPage=new LoginPage(page)
+    const poManager = new PageObjectManager(page);
+    const products = page.locator(".card-body");
 
-     loginPage.goTo()
-     loginPage.validLogin(email,pwd)
+    const loginPage = poManager.getLoginPage();
+    await loginPage.goTo()
+    await loginPage.validLogin(Data.username, Data.password)
 
+    const dashboardPage = poManager.getDashBoardPage();
+    await dashboardPage.searchProduct(Data.productName)
+    await dashboardPage.navigateToCart()
 
-    await page.waitForLoadState('networkidle');
-    await page.locator(".card-body b").first().waitFor();
+    const CartPage = poManager.getCartPage();
+    await CartPage.verifyProductIsDisplayed(Data.productName);
+    await CartPage.Checkout();
 
-    await page.locator(".card-body").filter({ hasText: "ZARA COAT 3" })
-        .getByRole("button", { name: "Add to Cart" }).click();
+    const OrderReviewPage = poManager.getOrderREviewPage()
+    await OrderReviewPage.searchCountryAndSelect("ind", "India");
+    const orderIds = await OrderReviewPage.submitAndGetOrderId()
+    console.log(orderIds)
+    await OrderReviewPage.NavigateToOrders()
 
-    await page.getByRole("listitem").getByRole('button', { name: "Cart" }).click();
+    const OrderHistoryPage = poManager.getOrderHistoryPage()
+    await OrderHistoryPage.searchOrderAndSelect(orderIds)
+    expect(orderIds.includes(await OrderHistoryPage.getOrderId())).toBeTruthy();
 
-    //await page.pause();
-    await page.locator("div li").first().waitFor();
-    await expect(page.getByText("ZARA COAT 3")).toBeVisible();
-
-    await page.getByRole("button", { name: "Checkout" }).click();
-
-    await page.getByPlaceholder("Select Country").pressSequentially("ind");
-
-    await page.getByRole("button", { name: "India" }).nth(1).click();
-    await page.getByText("PLACE ORDER").click();
-
-    await expect(page.getByText("Thankyou for the order.")).toBeVisible();
 })
